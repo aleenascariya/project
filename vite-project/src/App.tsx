@@ -13,6 +13,18 @@ export default function App() {
 		<button>
 		Adaptive AI
 		</button>
+
+		<button>
+		Fixed Clock
+		</button>
+		</div>
+
+		<div>
+		<p>Paused</p>
+
+		<button>
+		Play
+		</button>
 		</div>
 
 		<div>
