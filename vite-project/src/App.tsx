@@ -162,9 +162,17 @@ export default function App() {
 		>
 		Save
 		</button>
-		<p>
-		Records: {engine.savedRecords.length}
-		</p>
+		
+		<ul>
+		{engine.savedRecords.map((record) => (
+			<li key={record.id}>
+			Vehicles: {record.totalVehicles}
+			{" | "}
+			Active Lane: {record.activeLane}
+			</li>
+		))}
+		</ul>
+
 		</div>
 		</section>
 		</main>
