@@ -119,6 +119,12 @@ export default function App() {
 		</aside>
 
 		<section>
+		<div>
+		<h3>Active Signal</h3>
+
+		<p>{engine.activeGreenLane}</p>
+		</div>
+
 		<JunctionSimulator />
 		
 		<div>
