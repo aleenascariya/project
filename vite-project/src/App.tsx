@@ -40,6 +40,12 @@ export default function App() {
 		<li>West: LOW</li>
 		</ul>
 		</div>
+
+		<div>
+            <h3>Activity Stream</h3>
+
+            <p>No activity available</p>
+          </div>
 		</section>
 		</main>
 		</div>
