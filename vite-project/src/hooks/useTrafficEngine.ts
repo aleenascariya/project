@@ -28,10 +28,21 @@ export function useTrafficEngine() {
 };
 
   const getLaneCounts = () => ({
-  North: 0,
-  East: 0,
-  South: 0,
-  West: 0,
+  North: allVehicles.filter(
+    (vehicle) => vehicle.lane === "North"
+  ).length,
+
+  East: allVehicles.filter(
+    (vehicle) => vehicle.lane === "East"
+  ).length,
+
+  South: allVehicles.filter(
+    (vehicle) => vehicle.lane === "South"
+  ).length,
+
+  West: allVehicles.filter(
+    (vehicle) => vehicle.lane === "West"
+  ).length,
 });
 
   return {
