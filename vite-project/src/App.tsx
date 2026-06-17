@@ -30,6 +30,16 @@ export default function App() {
 
 		<section>
 		<JunctionSimulator />
+		<div>
+		<h3>Live Density</h3>
+
+		<ul>
+		<li>North: LOW</li>
+		<li>East: LOW</li>
+		<li>South: LOW</li>
+		<li>West: LOW</li>
+		</ul>
+		</div>
 		</section>
 		</main>
 		</div>
