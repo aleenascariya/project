@@ -4,6 +4,7 @@ import {
   Vehicle,
   LaneDirection,
   ActivityLog,
+  TrafficRecord,
 } from "../types";
 
 export function useTrafficEngine() {
@@ -21,6 +22,9 @@ export function useTrafficEngine() {
 
   const [logs, setLogs] =
   useState<ActivityLog[]>([]);
+
+  const [savedRecords, setSavedRecords] =
+  useState<TrafficRecord[]>([]);
 
   const addLog = (message: string) => {
   const newLog: ActivityLog = {
@@ -90,5 +94,6 @@ export function useTrafficEngine() {
     handleOverrideLane,
     logs,
     addLog,
+    savedRecords,
   };
 }
