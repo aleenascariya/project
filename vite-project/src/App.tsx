@@ -46,6 +46,12 @@ export default function App() {
 
             <p>No activity available</p>
           </div>
+
+	  <div>
+            <h3>Data Registry</h3>
+
+            <p>No records saved</p>
+          </div>
 		</section>
 		</main>
 		</div>
