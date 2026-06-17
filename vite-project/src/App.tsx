@@ -1,5 +1,7 @@
 import { JunctionSimulator } from "./components/JunctionSimulator";
+import { useTrafficEngine } from "./hooks/useTrafficEngine";
 export default function App() {
+	const engine = useTrafficEngine();
 	return (
 		<div>
 		<header>
@@ -11,20 +13,32 @@ export default function App() {
 		<aside>
 		<h3>Control Paradigm</h3>
 
-		<button>
+		<button
+		onClick={() => engine.setControlMode("adaptive")}
+		>
 		Adaptive AI
 		</button>
 
-		<button>
+		<button
+		onClick={() => engine.setControlMode("fixed")}
+		>
 		Fixed Clock
 		</button>
 
 		<div>
-		<p>Paused</p>
+		<p>
+		{engine.isPlaying
+			? "Active Processing"
+			: "Paused"}
+			</p>
+		<button 
+		onClick={() =>
+			engine.setIsPlaying(!engine.isPlaying)
+		}
+	>
+	{engine.isPlaying ? "Pause" : "Play"}
+	</button>
 
-		<button>
-		Play
-		</button>
 		</div>
 		</aside>
 
