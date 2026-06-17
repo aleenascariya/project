@@ -80,6 +80,21 @@ export function useTrafficEngine() {
   ).length,
 });
 
+  const saveTrafficMetrics = () => {
+  const newRecord: TrafficRecord = {
+    id: Date.now(),
+    totalVehicles: allVehicles.length,
+    activeLane: activeGreenLane,
+  };
+
+  setSavedRecords((prev) => [
+    newRecord,
+    ...prev,
+  ]);
+
+  addLog("Traffic metrics saved");
+};
+
   return {
     controlMode,
     setControlMode,
@@ -95,5 +110,6 @@ export function useTrafficEngine() {
     logs,
     addLog,
     savedRecords,
+    saveTrafficMetrics,
   };
 }
