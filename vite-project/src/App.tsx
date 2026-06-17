@@ -79,6 +79,42 @@ export default function App() {
 		</button>
 		</div>
 
+		<div>
+		<h3>Phase Overrides</h3>
+
+		<button
+		onClick={() =>
+			engine.handleOverrideLane("North")
+		}
+		>
+		North
+		</button>
+
+		<button
+		onClick={() =>
+			engine.handleOverrideLane("East")
+		}
+		>
+		East
+		</button>
+
+		<button
+		onClick={() =>
+			engine.handleOverrideLane("South")
+		}
+		>
+		South
+		</button>
+
+		<button
+		onClick={() =>
+			engine.handleOverrideLane("West")
+		}
+		>
+		West
+		</button>
+		</div>
+
 		</div>
 		</aside>
 
