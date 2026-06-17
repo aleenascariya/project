@@ -46,12 +46,16 @@ export function useTrafficEngine() {
     ...prev,
     newVehicle,
   ]);
+
+  addLog(`Vehicle added to ${lane}`);
 };
 
   const handleOverrideLane = (
 	  lane: LaneDirection
   ) => {
 	  setActiveGreenLane(lane);
+
+	  addLog(`Signal changed to ${lane}`);
   };
 
   const getLaneCounts = () => ({
