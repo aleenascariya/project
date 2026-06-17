@@ -23,3 +23,15 @@ export interface ActivityLog {
   time: string;
   message: string;
 }
+
+export interface TrafficRecord {
+  id: number;
+  totalVehicles: number;
+  activeLane: LaneDirection;
+}
+
+export interface TrafficRecord {
+  id: number;
+  totalVehicles: number;
+  activeLane: LaneDirection;
+}
