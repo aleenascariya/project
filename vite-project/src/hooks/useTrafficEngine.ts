@@ -7,11 +7,19 @@ export function useTrafficEngine() {
 
   const [isPlaying, setIsPlaying] =
     useState(false);
+  
+  const getLaneCounts = () => ({
+  North: 0,
+  East: 0,
+  South: 0,
+  West: 0,
+});
 
   return {
     controlMode,
     setControlMode,
     isPlaying,
     setIsPlaying,
+    getLaneCounts,
   };
 }
