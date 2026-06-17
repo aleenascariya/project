@@ -3,6 +3,7 @@ import {
   ControlMode,
   Vehicle,
   LaneDirection,
+  ActivityLog,
 } from "../types";
 
 export function useTrafficEngine() {
@@ -17,6 +18,9 @@ export function useTrafficEngine() {
 
   const [activeGreenLane, setActiveGreenLane] =
   useState<LaneDirection>("North");
+
+  const [logs, setLogs] =
+  useState<ActivityLog[]>([]);
   
   const handleInjectVehicle = (
 	  lane: Vehicle["lane"]
@@ -67,5 +71,6 @@ export function useTrafficEngine() {
     activeGreenLane,
     setActiveGreenLane,
     handleOverrideLane,
+    logs,
   };
 }
