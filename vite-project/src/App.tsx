@@ -141,7 +141,17 @@ export default function App() {
 		<div>
 		<h3>Activity Stream</h3>
 
-		<p>No activity available</p>
+		{engine.logs.length === 0 ? (
+			<p>No activity available</p>
+		) : (
+		<ul>
+		{engine.logs.map((log) => (
+			<li key={log.id}>
+			{log.time} - {log.message}
+			</li>
+		))}
+		</ul>
+		)}
 		</div>
 
 		<div>
