@@ -13,7 +13,9 @@ export function JunctionSimulator({
     <div>
     <h2>Traffic Junction Simulator</h2>
 
-    <p>Active Signal: {activeLane}</p>
+    <h3>
+    Green Signal: {activeLane}
+    </h3>
 
     <ul>
       <li>
