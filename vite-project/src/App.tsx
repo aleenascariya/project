@@ -46,6 +46,7 @@ export default function App() {
 		>
 		{engine.isPlaying ? "Pause" : "Play"}
 		</button>
+		</div>
 
 		<div>
 		<h3>Vehicle Injection</h3>
@@ -122,11 +123,6 @@ export default function App() {
 		</aside>
 
 		<section>
-		<div>
-		<h3>Active Signal</h3>
-
-		<p>{engine.activeGreenLane}</p>
-		</div>
 
 		<div>
 		<h3>AI Status</h3>
