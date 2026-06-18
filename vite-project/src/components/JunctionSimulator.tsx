@@ -43,13 +43,25 @@ export function JunctionSimulator({
       </li>
 
       <li>
-        West: {
+      West: {
           vehicles.filter(
             (vehicle) => vehicle.lane === "West"
           ).length
         }
       </li>
     </ul>
-  </div>
+    <div>
+  <h3>Vehicles</h3>
+
+  <ul>
+    {vehicles.map((vehicle) => (
+      <li key={vehicle.id}>
+        Vehicle #{vehicle.id} - {vehicle.lane}
+      </li>
+    ))}
+  </ul>
+</div>
+
+</div>
 );
 }
