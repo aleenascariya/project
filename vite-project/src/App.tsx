@@ -125,7 +125,10 @@ export default function App() {
 		<p>{engine.activeGreenLane}</p>
 		</div>
 
-		<JunctionSimulator />
+		<JunctionSimulator 
+		vehicles={engine.allVehicles}
+		activeLane={engine.activeGreenLane}
+		/>
 		
 		<div>
 		<h3>Live Density</h3>
