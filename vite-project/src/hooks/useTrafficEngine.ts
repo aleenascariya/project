@@ -47,11 +47,17 @@ export function useTrafficEngine() {
 	  lane,
   };
   setAllVehicles((prev) => [
-    ...prev,
-    newVehicle,
-  ]);
+  ...prev,
+  newVehicle,
+]);
 
-  addLog(`Vehicle added to ${lane}`);
+addLog(`Vehicle added to ${lane}`);
+
+if (controlMode === "adaptive") {
+  setTimeout(() => {
+    runAdaptiveControl();
+  }, 0);
+}
 };
 
   const handleOverrideLane = (
