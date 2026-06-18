@@ -118,7 +118,6 @@ export default function App() {
 		West
 		</button>
 		</div>
-
 		</div>
 		</aside>
 
@@ -129,7 +128,27 @@ export default function App() {
 		<p>{engine.activeGreenLane}</p>
 		</div>
 
-		<JunctionSimulator />
+		<div>
+		<h3>AI Status</h3>
+
+		<p>
+		{engine.controlMode === "adaptive"
+			? "Adaptive optimization active"
+			: "Fixed timing active"}
+		</p>
+		</div>
+
+		<div>
+		<h3>Active Signal</h3>
+
+		<p>{engine.activeGreenLane}</p>
+		</div>
+
+
+		<JunctionSimulator
+		vehicles={engine.allVehicles}
+		activeLane={engine.activeGreenLane}
+		/>
 		
 		<div>
 		<h3>Live Density</h3>
