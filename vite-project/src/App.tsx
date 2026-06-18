@@ -16,6 +16,10 @@ export default function App() {
 		<aside>
 		<h3>Control Paradigm</h3>
 
+		<p>
+		Current Mode: {engine.controlMode}
+		</p>
+
 		<button
 		onClick={() => engine.setControlMode("adaptive")}
 		>
