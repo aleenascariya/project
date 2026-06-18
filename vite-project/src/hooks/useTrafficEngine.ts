@@ -79,6 +79,26 @@ export function useTrafficEngine() {
     (vehicle) => vehicle.lane === "West"
   ).length,
 });
+  
+  const getHighestDensityLane = (): LaneDirection => {
+  const counts = getLaneCounts();
+
+  let highestLane: LaneDirection = "North";
+
+  if (counts.East > counts[highestLane]) {
+    highestLane = "East";
+  }
+
+  if (counts.South > counts[highestLane]) {
+    highestLane = "South";
+  }
+
+  if (counts.West > counts[highestLane]) {
+    highestLane = "West";
+  }
+
+  return highestLane;
+};
 
   const saveTrafficMetrics = () => {
   const newRecord: TrafficRecord = {
@@ -111,5 +131,6 @@ export function useTrafficEngine() {
     addLog,
     savedRecords,
     saveTrafficMetrics,
+    getHighestDensityLane,
   };
 }
