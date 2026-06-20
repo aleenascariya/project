@@ -197,13 +197,17 @@ export default function App() {
               Enter a prompt before generating insights.
             </p>
 
-            <ul>
-              {engine.insights.map((insight) => (
-                <li key={insight.id}>
-                  {insight.response}
-                </li>
-              ))}
-            </ul>
+            {engine.insights.length === 0 ? (
+              <p>No insights generated</p>
+            ) : (
+              <ul>
+                {engine.insights.map((insight) => (
+                  <li key={insight.id}>
+                    {insight.response}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div>
