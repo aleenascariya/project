@@ -161,7 +161,7 @@ export default function App() {
 		</div>
 
 
-		<JunctionSimulator
+		<JunctionSimulator 
 		vehicles={engine.allVehicles}
 		activeLane={engine.activeGreenLane}
 		/>
