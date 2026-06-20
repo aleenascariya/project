@@ -123,6 +123,8 @@ if (controlMode === "adaptive") {
   setActiveGreenLane(nextLane);
 
   addLog(`Adaptive mode selected ${nextLane}`);
+
+  generateRecommendation();
 };
 
   const saveTrafficMetrics = () => {
