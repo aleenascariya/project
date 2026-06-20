@@ -101,3 +101,16 @@ aside > div {
   display: flex;
   flex-direction: column;
 }
+
+textarea {
+  margin-bottom: 12px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 0;
+}
