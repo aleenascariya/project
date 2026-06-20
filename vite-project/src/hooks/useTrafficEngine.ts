@@ -1,5 +1,6 @@
 import {
   ActivityLog,
+  AIInsight,
   AIRecommendation,
   ControlMode,
   LaneDirection,
@@ -178,6 +179,29 @@ if (controlMode === "adaptive") {
   const [recommendations, setRecommendations] =
   useState<AIRecommendation[]>([]);
 
+  const [insights, setInsights] =
+  useState<AIInsight[]>([]);
+
+  const [currentPrompt, setCurrentPrompt] =
+  useState("");
+
+  const generateInsight = () => {
+  const busiestLane = getHighestDensityLane();
+
+  const insight: AIInsight = {
+    id: Date.now(),
+    prompt: currentPrompt,
+    response: `Current traffic conditions suggest prioritizing ${busiestLane} lane.`,
+  };
+
+  setInsights((prev) => [
+    insight,
+    ...prev,
+  ]);
+
+  addLog("AI insight generated");
+};
+
   return {
     controlMode,
     setControlMode,
@@ -198,5 +222,9 @@ if (controlMode === "adaptive") {
     runAdaptiveControl,
     recommendations,
     generateRecommendation,
+    insights,
+    currentPrompt,
+    setCurrentPrompt,
+    generateInsight,
   };
 }

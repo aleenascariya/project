@@ -39,3 +39,8 @@ export interface AIRecommendation {
   id: number;
   message: string;
 }
+export interface AIInsight {
+  id: number;
+  prompt: string;
+  response: string;
+}
