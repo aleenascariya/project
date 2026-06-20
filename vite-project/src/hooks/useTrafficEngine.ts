@@ -228,6 +228,7 @@ export function useTrafficEngine() {
       totalVehicles: allVehicles.length,
       activeLane: activeGreenLane,
       controlMode,
+      savedAt: new Date().toLocaleTimeString(),
     };
 
     setSavedRecords((prev) => [
