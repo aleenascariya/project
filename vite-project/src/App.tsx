@@ -268,6 +268,10 @@ export default function App() {
           <div>
             <h3>Activity Stream</h3>
 
+	    <button onClick={engine.clearLogs}>
+              Clear Logs
+            </button>
+
             {engine.logs.length === 0 ? (
               <p>No activity available</p>
             ) : (
