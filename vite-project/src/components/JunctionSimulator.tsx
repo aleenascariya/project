@@ -58,13 +58,17 @@ export function JunctionSimulator({
       <div>
         <h3>Vehicles</h3>
 
-        <ul>
-          {vehicles.map((vehicle) => (
-            <li key={vehicle.id}>
-              Vehicle #{vehicle.id} - {vehicle.lane}
-            </li>
-          ))}
-        </ul>
+        {vehicles.length === 0 ? (
+          <p>No vehicles available</p>
+        ) : (
+          <ul>
+            {vehicles.map((vehicle) => (
+              <li key={vehicle.id}>
+                Vehicle #{vehicle.id} - {vehicle.lane}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
