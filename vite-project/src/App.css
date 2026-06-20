@@ -114,3 +114,13 @@ li {
   border-bottom: 1px solid #e5e7eb;
   padding: 8px 0;
 }
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    text-align: center;
+  }
+}
