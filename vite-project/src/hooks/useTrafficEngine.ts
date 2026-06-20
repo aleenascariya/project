@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   ActivityLog,
   AIInsight,
@@ -16,215 +18,190 @@ export function useTrafficEngine() {
     useState(false);
 
   const [allVehicles, setAllVehicles] =
-  useState<Vehicle[]>([]);
+    useState<Vehicle[]>([]);
 
   const [activeGreenLane, setActiveGreenLane] =
-  useState<LaneDirection>("North");
+    useState<LaneDirection>("North");
 
   const [logs, setLogs] =
-  useState<ActivityLog[]>([]);
+    useState<ActivityLog[]>([]);
 
   const [savedRecords, setSavedRecords] =
-  useState<TrafficRecord[]>([]);
+    useState<TrafficRecord[]>([]);
+
+  const [recommendations, setRecommendations] =
+    useState<AIRecommendation[]>([]);
+
+  const [insights, setInsights] =
+    useState<AIInsight[]>([]);
+
+  const [currentPrompt, setCurrentPrompt] =
+    useState("");
 
   const addLog = (message: string) => {
-  const newLog: ActivityLog = {
-    id: Date.now(),
-    time: new Date().toLocaleTimeString(),
-    message,
-  };
+    const newLog: ActivityLog = {
+      id: Date.now(),
+      time: new Date().toLocaleTimeString(),
+      message,
+    };
 
-  setLogs((prev) => [
-    newLog,
-    ...prev,
-  ]);
-};
-  
-  const handleInjectVehicle = (
-	  lane: Vehicle["lane"]
-  ) => {
-  const newVehicle: Vehicle = {
-	  id: Date.now(),
-	  lane,
-  };
-  setAllVehicles((prev) => {
-  const updatedVehicles = [
-    ...prev,
-    newVehicle,
-  ];
-
-  return updatedVehicles;
-});
-
-feature/adaptive-control
-addLog(`Vehicle added to ${lane}`);
-
-if (controlMode === "adaptive") {
-  setTimeout(() => {
-    runAdaptiveControl();
-  }, 0);
-}
-};
-
-  const handleOverrideLane = (
-	  lane: LaneDirection
-  ) => {
-	  setActiveGreenLane(lane);
-
-	  addLog(`Signal changed to ${lane}`);
+    setLogs((prev) => [newLog, ...prev]);
   };
 
   const getLaneCounts = () => ({
-  North: allVehicles.filter(
-    (vehicle) => vehicle.lane === "North"
-  ).length,
+    North: allVehicles.filter(
+      (vehicle) => vehicle.lane === "North"
+    ).length,
 
-  East: allVehicles.filter(
-    (vehicle) => vehicle.lane === "East"
-  ).length,
+    East: allVehicles.filter(
+      (vehicle) => vehicle.lane === "East"
+    ).length,
 
-  South: allVehicles.filter(
-    (vehicle) => vehicle.lane === "South"
-  ).length,
+    South: allVehicles.filter(
+      (vehicle) => vehicle.lane === "South"
+    ).length,
 
-  West: allVehicles.filter(
-    (vehicle) => vehicle.lane === "West"
-  ).length,
-});
-  
+    West: allVehicles.filter(
+      (vehicle) => vehicle.lane === "West"
+    ).length,
+  });
+
   const getHighestDensityLane = (): LaneDirection => {
-  const counts = getLaneCounts();
+    const counts = getLaneCounts();
 
-  let highestLane: LaneDirection = "North";
+    let highestLane: LaneDirection = "North";
 
-  if (counts.East > counts[highestLane]) {
-    highestLane = "East";
-  }
+    if (counts.East > counts[highestLane]) {
+      highestLane = "East";
+    }
 
-  if (counts.South > counts[highestLane]) {
-    highestLane = "South";
-  }
+    if (counts.South > counts[highestLane]) {
+      highestLane = "South";
+    }
 
-  if (counts.West > counts[highestLane]) {
-    highestLane = "West";
-  }
+    if (counts.West > counts[highestLane]) {
+      highestLane = "West";
+    }
 
-  return highestLane;
-};
- 
-  const generateRecommendation = () => {
-  const busiestLane = getHighestDensityLane();
-
-  const recommendation: AIRecommendation = {
-    id: Date.now(),
-    message: `Prioritize ${busiestLane} traffic flow`,
+    return highestLane;
   };
 
-  setRecommendations([recommendation]);
-};
- 
-  const runAdaptiveControl = () => {
-  const nextLane = getHighestDensityLane();
+  const generateRecommendation = () => {
+    const busiestLane = getHighestDensityLane();
 
-  setActiveGreenLane(nextLane);
+    const recommendation: AIRecommendation = {
+      id: Date.now(),
+      message: `Prioritize ${busiestLane} traffic flow`,
+    };
 
-  addLog(`Adaptive mode selected ${nextLane}`);
-
-  generateRecommendation();
-};
-
-  const getHighestDensityLane = (): LaneDirection => {
-  const counts = getLaneCounts();
-
-  let highestLane: LaneDirection = "North";
-
-  if (counts.East > counts[highestLane]) {
-    highestLane = "East";
-  }
-
-  if (counts.South > counts[highestLane]) {
-    highestLane = "South";
-  }
-
-  if (counts.West > counts[highestLane]) {
-    highestLane = "West";
-  }
-
-  return highestLane;
-};
+    setRecommendations([recommendation]);
+  };
 
   const runAdaptiveControl = () => {
-  const nextLane = getHighestDensityLane();
+    const nextLane = getHighestDensityLane();
 
-  setActiveGreenLane(nextLane);
+    setActiveGreenLane(nextLane);
 
-  addLog(`Adaptive mode selected ${nextLane}`);
-};
+    addLog(`Adaptive mode selected ${nextLane}`);
+
+    generateRecommendation();
+  };
+
+  const handleInjectVehicle = (
+    lane: Vehicle["lane"]
+  ) => {
+    const newVehicle: Vehicle = {
+      id: Date.now(),
+      lane,
+    };
+
+    setAllVehicles((prev) => [
+      ...prev,
+      newVehicle,
+    ]);
+
+    addLog(`Vehicle added to ${lane}`);
+
+    if (controlMode === "adaptive") {
+      setTimeout(() => {
+        runAdaptiveControl();
+      }, 0);
+    }
+  };
+
+  const handleOverrideLane = (
+    lane: LaneDirection
+  ) => {
+    setActiveGreenLane(lane);
+
+    addLog(`Signal changed to ${lane}`);
+  };
 
   const saveTrafficMetrics = () => {
-  const newRecord: TrafficRecord = {
-    id: Date.now(),
-    totalVehicles: allVehicles.length,
-    activeLane: activeGreenLane,
+    const newRecord: TrafficRecord = {
+      id: Date.now(),
+      totalVehicles: allVehicles.length,
+      activeLane: activeGreenLane,
+    };
+
+    setSavedRecords((prev) => [
+      newRecord,
+      ...prev,
+    ]);
+
+    addLog("Traffic metrics saved");
   };
-
-  setSavedRecords((prev) => [
-    newRecord,
-    ...prev,
-  ]);
-
-  addLog("Traffic metrics saved");
-};
- 
-  const [recommendations, setRecommendations] =
-  useState<AIRecommendation[]>([]);
-
-  const [insights, setInsights] =
-  useState<AIInsight[]>([]);
-
-  const [currentPrompt, setCurrentPrompt] =
-  useState("");
 
   const generateInsight = () => {
-  const busiestLane = getHighestDensityLane();
+    const busiestLane = getHighestDensityLane();
 
-  const insight: AIInsight = {
-    id: Date.now(),
-    prompt: currentPrompt,
-    response: `Current traffic conditions suggest prioritizing ${busiestLane} lane.`,
+    const insight: AIInsight = {
+      id: Date.now(),
+      prompt: currentPrompt,
+      response: `Current traffic conditions suggest prioritizing ${busiestLane} lane.`,
+    };
+
+    setInsights((prev) => [
+      insight,
+      ...prev,
+    ]);
+
+    addLog("AI insight generated");
   };
-
-  setInsights((prev) => [
-    insight,
-    ...prev,
-  ]);
-
-  addLog("AI insight generated");
-};
 
   return {
     controlMode,
     setControlMode,
+
     isPlaying,
     setIsPlaying,
-    getLaneCounts,
+
     allVehicles,
-    setAllVehicles,
-    handleInjectVehicle,
+
     activeGreenLane,
-    setActiveGreenLane,
-    handleOverrideLane,
+
     logs,
-    addLog,
+
     savedRecords,
-    saveTrafficMetrics,
-    getHighestDensityLane,
-    runAdaptiveControl,
+
     recommendations,
-    generateRecommendation,
+
     insights,
+
     currentPrompt,
     setCurrentPrompt,
+
+    handleInjectVehicle,
+    handleOverrideLane,
+
+    saveTrafficMetrics,
+
+    getLaneCounts,
+    getHighestDensityLane,
+
+    runAdaptiveControl,
+
+    generateRecommendation,
     generateInsight,
   };
 }

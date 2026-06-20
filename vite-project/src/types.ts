@@ -30,11 +30,6 @@ export interface TrafficRecord {
   activeLane: LaneDirection;
 }
 
-export interface TrafficRecord {
-  id: number;
-  totalVehicles: number;
-  activeLane: LaneDirection;
-}
 export interface AIRecommendation {
   id: number;
   message: string;

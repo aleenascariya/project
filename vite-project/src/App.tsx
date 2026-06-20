@@ -2,245 +2,239 @@ import { JunctionSimulator } from "./components/JunctionSimulator";
 import { useTrafficEngine } from "./hooks/useTrafficEngine";
 
 export default function App() {
-	const engine = useTrafficEngine();
-	const laneCounts = engine.getLaneCounts();
+  const engine = useTrafficEngine();
+  const laneCounts = engine.getLaneCounts();
 
-	return (
-		<div>
-		<header>
-		<h1>NeuralTraffic AI</h1>
-		<p>Dynamic Stream: ONLINE</p>
-		</header>
+  return (
+    <div>
+      <header>
+        <h1>NeuralTraffic AI</h1>
+        <p>Dynamic Stream: ONLINE</p>
+      </header>
 
-		<main>
-		<aside>
-		<h3>Control Paradigm</h3>
+      <main>
+        <aside>
+          <h3>Control Paradigm</h3>
 
-		<p>
-		Current Mode: {engine.controlMode}
-		</p>
+          <p>Current Mode: {engine.controlMode}</p>
 
-		<button
-		onClick={() => engine.setControlMode("adaptive")}
-		>
-		Adaptive AI
-		</button>
+          <button
+            onClick={() => engine.setControlMode("adaptive")}
+          >
+            Adaptive AI
+          </button>
 
-		<button
-		onClick={() => engine.setControlMode("fixed")}
-		>
-		Fixed Clock
-		</button>
+          <button
+            onClick={() => engine.setControlMode("fixed")}
+          >
+            Fixed Clock
+          </button>
 
-		<div>
-		<p>
-		{engine.isPlaying
-			? "Active Processing"
-			: "Paused"}
-		</p>
+          <div>
+            <p>
+              {engine.isPlaying
+                ? "Active Processing"
+                : "Paused"}
+            </p>
 
-		<button 
-		onClick={() =>
-			engine.setIsPlaying(!engine.isPlaying)
-		}
-		>
-		{engine.isPlaying ? "Pause" : "Play"}
-		</button>
-		</div>
+            <button
+              onClick={() =>
+                engine.setIsPlaying(!engine.isPlaying)
+              }
+            >
+              {engine.isPlaying ? "Pause" : "Play"}
+            </button>
+          </div>
 
-		<div>
-		<h3>Vehicle Injection</h3>
+          <div>
+            <h3>Vehicle Injection</h3>
 
-		<button
-		onClick={() =>
-			engine.handleInjectVehicle("North")
-		}
-		>
-		Add North Vehicle
-		</button>
+            <button
+              onClick={() =>
+                engine.handleInjectVehicle("North")
+              }
+            >
+              Add North Vehicle
+            </button>
 
-		<button
-		onClick={() =>
-			engine.handleInjectVehicle("East")
-		}
-		>
-		Add East Vehicle
-		</button>
+            <button
+              onClick={() =>
+                engine.handleInjectVehicle("East")
+              }
+            >
+              Add East Vehicle
+            </button>
 
-		<button
-		onClick={() =>
-			engine.handleInjectVehicle("South")
-		}
-		>
-		Add South Vehicle
-		</button>
+            <button
+              onClick={() =>
+                engine.handleInjectVehicle("South")
+              }
+            >
+              Add South Vehicle
+            </button>
 
-		<button
-		onClick={() =>
-			engine.handleInjectVehicle("West")
-		}
-		>
-		Add West Vehicle
-		</button>
-		</div>
+            <button
+              onClick={() =>
+                engine.handleInjectVehicle("West")
+              }
+            >
+              Add West Vehicle
+            </button>
+          </div>
 
-		<div>
-		<h3>Phase Overrides</h3>
+          <div>
+            <h3>Phase Overrides</h3>
 
-		<button
-		onClick={() =>
-			engine.handleOverrideLane("North")
-		}
-		>
-		North
-		</button>
+            <button
+              onClick={() =>
+                engine.handleOverrideLane("North")
+              }
+            >
+              North
+            </button>
 
-		<button
-		onClick={() =>
-			engine.handleOverrideLane("East")
-		}
-		>
-		East
-		</button>
+            <button
+              onClick={() =>
+                engine.handleOverrideLane("East")
+              }
+            >
+              East
+            </button>
 
-		<button
-		onClick={() =>
-			engine.handleOverrideLane("South")
-		}
-		>
-		South
-		</button>
+            <button
+              onClick={() =>
+                engine.handleOverrideLane("South")
+              }
+            >
+              South
+            </button>
 
-		<button
-		onClick={() =>
-			engine.handleOverrideLane("West")
-		}
-		>
-		West
-		</button>
-		</div>
-		</div>
-		</aside>
+            <button
+              onClick={() =>
+                engine.handleOverrideLane("West")
+              }
+            >
+              West
+            </button>
+          </div>
+        </aside>
 
-		<section>
+        <section>
+          <div>
+            <h3>AI Status</h3>
 
-		<div>
-		<h3>AI Status</h3>
+            <p>
+              {engine.controlMode === "adaptive"
+                ? "Adaptive optimization active"
+                : "Fixed timing active"}
+            </p>
+          </div>
 
-		<p>
-		{engine.controlMode === "adaptive"
-			? "Adaptive optimization active"
-			: "Fixed timing active"}
-		</p>
-		</div>
+          <div>
+            <h3>AI Recommendations</h3>
 
-		<div>
+            {engine.recommendations.length === 0 ? (
+              <p>No recommendations available</p>
+            ) : (
+              <ul>
+                {engine.recommendations.map(
+                  (recommendation) => (
+                    <li key={recommendation.id}>
+                      {recommendation.message}
+                    </li>
+                  )
+                )}
+              </ul>
+            )}
+          </div>
 
-		<h3>AI Recommendations</h3>
+          <div>
+            <h3>AI Insights</h3>
 
-		{engine.recommendations.length === 0 ? (
-			<p>No recommendations available</p>
-		) : (
-		<ul>
-		{engine.recommendations.map(
-			(recommendation) => (
-				<li key={recommendation.id}>
-				{recommendation.message}
-				</li>
-			)
-		)}
-		</ul>
-		)}
+            <textarea
+              value={engine.currentPrompt}
+              onChange={(event) =>
+                engine.setCurrentPrompt(
+                  event.target.value
+                )
+              }
+              placeholder="Ask AI about current traffic conditions"
+            />
 
-		</div>
+            <button
+              onClick={engine.generateInsight}
+            >
+              Generate Insight
+            </button>
 
-		<div>
-		<h3>AI Insights</h3>
+            <ul>
+              {engine.insights.map((insight) => (
+                <li key={insight.id}>
+                  {insight.response}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-		<textarea
-		value={engine.currentPrompt}
-		onChange={(event) =>
-			engine.setCurrentPrompt(event.target.value)
-		}
-		placeholder="Ask AI about current traffic conditions"
-		/>
+          <div>
+            <h3>Active Signal</h3>
 
-		<button
-		onClick={engine.generateInsight}
-		>
-		Generate Insight
-		</button>
+            <p>{engine.activeGreenLane}</p>
+          </div>
 
-		<ul>
-		{engine.insights.map((insight) => (
-			<li key={insight.id}>
-			{insight.response}
-			</li>
-		))}
-		</ul>
-		</div>
+          <JunctionSimulator
+            vehicles={engine.allVehicles}
+            activeLane={engine.activeGreenLane}
+          />
 
-		<div>
-		<h3>Active Signal</h3>
+          <div>
+            <h3>Live Density</h3>
 
-		<p>{engine.activeGreenLane}</p>
-		</div>
+            <ul>
+              <li>North: {laneCounts.North}</li>
+              <li>East: {laneCounts.East}</li>
+              <li>South: {laneCounts.South}</li>
+              <li>West: {laneCounts.West}</li>
+            </ul>
+          </div>
 
+          <div>
+            <h3>Activity Stream</h3>
 
-		<JunctionSimulator 
-		vehicles={engine.allVehicles}
-		activeLane={engine.activeGreenLane}
-		/>
-		
-		<div>
-		<h3>Live Density</h3>
+            {engine.logs.length === 0 ? (
+              <p>No activity available</p>
+            ) : (
+              <ul>
+                {engine.logs.map((log) => (
+                  <li key={log.id}>
+                    {log.time} - {log.message}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-		<ul>
-		<li>North: {laneCounts.North}</li>
-		<li>East: {laneCounts.East}</li>
-		<li>South: {laneCounts.South}</li>
-		<li>West: {laneCounts.West}</li>
-		</ul>
-		</div>
+          <div>
+            <h3>Data Registry</h3>
 
-		<div>
-		<h3>Activity Stream</h3>
+            <button
+              onClick={engine.saveTrafficMetrics}
+            >
+              Save
+            </button>
 
-		{engine.logs.length === 0 ? (
-			<p>No activity available</p>
-		) : (
-		<ul>
-		{engine.logs.map((log) => (
-			<li key={log.id}>
-			{log.time} - {log.message}
-			</li>
-		))}
-		</ul>
-		)}
-		</div>
-
-		<div>
-		<h3>Data Registry</h3>
-
-		<button
-		onClick={engine.saveTrafficMetrics}
-		>
-		Save
-		</button>
-		
-		<ul>
-		{engine.savedRecords.map((record) => (
-			<li key={record.id}>
-			Vehicles: {record.totalVehicles}
-			{" | "}
-			Active Lane: {record.activeLane}
-			</li>
-		))}
-		</ul>
-
-		</div>
-		</section>
-		</main>
-		</div>
-	);
-} 
+            <ul>
+              {engine.savedRecords.map((record) => (
+                <li key={record.id}>
+                  Vehicles: {record.totalVehicles}
+                  {" | "}
+                  Active Lane: {record.activeLane}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
