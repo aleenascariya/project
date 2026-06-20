@@ -239,6 +239,12 @@ export function useTrafficEngine() {
   };
 
   const generateInsight = () => {
+    if (currentPrompt.trim() === "") {
+      addLog("Insight generation failed");
+
+      return;
+    }
+
     const busiestLane = getHighestDensityLane();
 
     const insight: AIInsight = {
