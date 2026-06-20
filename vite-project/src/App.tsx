@@ -191,6 +191,10 @@ export default function App() {
               Generate Insight
             </button>
 
+	    <p>
+              Enter a prompt before generating insights.
+            </p>
+
             <ul>
               {engine.insights.map((insight) => (
                 <li key={insight.id}>
@@ -285,6 +289,10 @@ export default function App() {
             >
               Save
             </button>
+
+	    <p>
+              Save metrics after adding vehicles.
+            </p>
 
             <ul>
               {engine.savedRecords.map((record) => (
