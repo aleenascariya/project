@@ -1,5 +1,6 @@
 import {
   ActivityLog,
+  AIInsight,
   AIRecommendation,
   ControlMode,
   LaneDirection,
@@ -145,6 +146,9 @@ if (controlMode === "adaptive") {
   const [recommendations, setRecommendations] =
   useState<AIRecommendation[]>([]);
 
+  const [insights, setInsights] =
+  useState<AIInsight[]>([]);
+
   return {
     controlMode,
     setControlMode,
@@ -165,5 +169,6 @@ if (controlMode === "adaptive") {
     runAdaptiveControl,
     recommendations,
     generateRecommendation,
+    insights,
   };
 }
