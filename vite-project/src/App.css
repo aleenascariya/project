@@ -92,6 +92,17 @@ li {
   min-height: 300px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+.simulator h2 {
+  margin-bottom: 16px;
+}
+
+.simulator h3 {
+  color: #16a34a;
+}
+
+.simulator ul {
+  margin-top: 16px;
+}
 
 aside button {
   width: 100%;
