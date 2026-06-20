@@ -229,6 +229,22 @@ export default function App() {
 	    </ul>
 	   </div>
 
+	   <div>
+             <h3>System Health</h3
+
+	     <ul>
+               <li>Status: {engine.getTrafficStatus()}</li>
+
+               <li>
+                 Vehicles: {engine.getTotalVehicles()}
+               </li>
+
+               <li>
+                 Mode: {engine.controlMode}
+               </li>
+             </ul>
+           </div>
+
           <JunctionSimulator
             vehicles={engine.allVehicles}
             activeLane={engine.activeGreenLane}
