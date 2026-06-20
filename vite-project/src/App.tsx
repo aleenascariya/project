@@ -160,7 +160,7 @@ export default function App() {
             <h3>AI Recommendations</h3>
 
             {engine.recommendations.length === 0 ? (
-              <p>No recommendations available</p>
+              <p>Add vehicles to recieve AI recommendations</p>
             ) : (
               <ul>
                 {engine.recommendations.map(
