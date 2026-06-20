@@ -141,6 +141,12 @@ export function useTrafficEngine() {
     addLog(`Signal changed to ${lane}`);
   };
 
+  const clearVehicles = () => {
+    setAllVehicles([]);
+  
+    addLog("All vehicles cleared");
+  };
+
   const saveTrafficMetrics = () => {
     const newRecord: TrafficRecord = {
       id: Date.now(),
@@ -208,6 +214,9 @@ export function useTrafficEngine() {
 
     generateRecommendation,
     generateInsight,
+
     getTotalVehicles,
+    clearVehicles,
+
   };
 }
