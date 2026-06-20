@@ -152,6 +152,23 @@ if (controlMode === "adaptive") {
   const [currentPrompt, setCurrentPrompt] =
   useState("");
 
+  const generateInsight = () => {
+  const busiestLane = getHighestDensityLane();
+
+  const insight: AIInsight = {
+    id: Date.now(),
+    prompt: currentPrompt,
+    response: `Current traffic conditions suggest prioritizing ${busiestLane} lane.`,
+  };
+
+  setInsights((prev) => [
+    insight,
+    ...prev,
+  ]);
+
+  addLog("AI insight generated");
+};
+
   return {
     controlMode,
     setControlMode,
@@ -175,5 +192,6 @@ if (controlMode === "adaptive") {
     insights,
     currentPrompt,
     setCurrentPrompt,
+    generateInsight,
   };
 }
