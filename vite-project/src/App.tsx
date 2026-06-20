@@ -10,7 +10,9 @@ export default function App() {
     <div className="app">
       <header>
         <h1>NeuralTraffic AI</h1>
-        <p>Dynamic Stream: ONLINE</p>
+        <p>
+          Dynamic Stream: ONLINE | Smart Traffic Optimization
+        </p>
       </header>
 
       <main>
