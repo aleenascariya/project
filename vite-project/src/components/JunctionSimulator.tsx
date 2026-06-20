@@ -10,7 +10,7 @@ export function JunctionSimulator({
   activeLane,
 }: JunctionSimulatorProps) {
   return (
-    <div>
+    <div className="simulator">
       <h2>Traffic Junction Simulator</h2>
 
       <h3>
