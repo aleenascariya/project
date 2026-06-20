@@ -153,6 +153,32 @@ export default function App() {
 		</div>
 
 		<div>
+		<h3>AI Insights</h3>
+
+		<textarea
+		value={engine.currentPrompt}
+		onChange={(event) =>
+			engine.setCurrentPrompt(event.target.value)
+		}
+		placeholder="Ask AI about current traffic conditions"
+		/>
+
+		<button
+		onClick={engine.generateInsight}
+		>
+		Generate Insight
+		</button>
+
+		<ul>
+		{engine.insights.map((insight) => (
+			<li key={insight.id}>
+			{insight.response}
+			</li>
+		))}
+		</ul>
+		</div>
+
+		<div>
 		<h3>Active Signal</h3>
 
 		<p>{engine.activeGreenLane}</p>
