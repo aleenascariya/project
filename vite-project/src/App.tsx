@@ -135,13 +135,23 @@ export default function App() {
 		</div>
 
 		<div>
-		<h3>AI Status</h3>
 
-		<p>
-		{engine.controlMode === "adaptive"
-			? "Adaptive optimization active"
-			: "Fixed timing active"}
-		</p>
+		<h3>AI Recommendations</h3>
+
+		{engine.recommendations.length === 0 ? (
+			<p>No recommendations available</p>
+		) : (
+		<ul>
+		{engine.recommendations.map(
+			(recommendation) => (
+				<li key={recommendation.id}>
+				{recommendation.message}
+				</li>
+			)
+		)}
+		</ul>
+		)}
+
 		</div>
 
 		<div>

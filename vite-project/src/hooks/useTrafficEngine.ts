@@ -1,10 +1,10 @@
-import { useState } from "react";
 import {
-  ControlMode,
-  Vehicle,
-  LaneDirection,
   ActivityLog,
+  AIRecommendation,
+  ControlMode,
+  LaneDirection,
   TrafficRecord,
+  Vehicle,
 } from "../types";
 
 export function useTrafficEngine() {
@@ -111,12 +111,25 @@ if (controlMode === "adaptive") {
   return highestLane;
 };
  
+  const generateRecommendation = () => {
+  const busiestLane = getHighestDensityLane();
+
+  const recommendation: AIRecommendation = {
+    id: Date.now(),
+    message: `Prioritize ${busiestLane} traffic flow`,
+  };
+
+  setRecommendations([recommendation]);
+};
+ 
   const runAdaptiveControl = () => {
   const nextLane = getHighestDensityLane();
 
   setActiveGreenLane(nextLane);
 
   addLog(`Adaptive mode selected ${nextLane}`);
+
+  generateRecommendation();
 };
 
   const getHighestDensityLane = (): LaneDirection => {
@@ -161,6 +174,9 @@ if (controlMode === "adaptive") {
 
   addLog("Traffic metrics saved");
 };
+ 
+  const [recommendations, setRecommendations] =
+  useState<AIRecommendation[]>([]);
 
   return {
     controlMode,
@@ -180,5 +196,7 @@ if (controlMode === "adaptive") {
     saveTrafficMetrics,
     getHighestDensityLane,
     runAdaptiveControl,
+    recommendations,
+    generateRecommendation,
   };
 }
