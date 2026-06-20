@@ -118,6 +118,29 @@ export default function App() {
               West
             </button>
           </div>
+
+	  <div>
+            <h3>Simulation Controls</h3>
+
+            <button
+              onClick={engine.generateDemoTraffic}
+            >
+              Generate Demo Traffic
+            </button>
+
+            <button
+              onClick={engine.clearVehicles}
+            >
+              Clear Vehicles
+            </button>
+
+            <button
+              onClick={engine.resetDashboard}
+            >
+              Reset Dashboard
+            </button>
+          </div>
+	  
         </aside>
 
         <section>
