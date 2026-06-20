@@ -298,19 +298,23 @@ export default function App() {
               Save metrics after adding vehicles.
             </p>
 
-            <ul>
-              {engine.savedRecords.map((record) => (
-                <li key={record.id}>
-                  Vehicles: {record.totalVehicles}
-                  {" | "}
-                  Active Lane: {record.activeLane}
-		  {" | "}
-		  Mode: {record.controlMode}
-		  {" | "}
-                  Saved: {record.savedAt}
-                </li>
-              ))}
-            </ul>
+            {engine.savedRecords.length === 0 ? (
+              <p>No records saved</p>
+            ) : (
+              <ul>
+                {engine.savedRecords.map((record) => (
+                  <li key={record.id}>
+                    Vehicles: {record.totalVehicles}
+                    {" | "}
+                    Active Lane: {record.activeLane}
+                    {" | "}
+                    Mode: {record.controlMode}
+                    {" | "}
+                    Saved: {record.savedAt}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </section>
       </main>
