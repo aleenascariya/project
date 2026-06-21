@@ -5,9 +5,13 @@
 }
 
 body {
-  background: #f4f6f8;
-  color: #1f2937;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b
+  );
+  color: #e2e8f0;
+  font-family: Inter, Arial, sans-serif;
 }
 
 button {
@@ -19,18 +23,18 @@ button {
 }
 
 header {
-  background: #111827;
-  color: white;
-  padding: 20px 24px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
 }
 
 header h1 {
-  font-size: 2rem;
-  margin-bottom: 6px;
+  color: #f8fafc;
 }
 
 header p {
-  color: #d1d5db;
+  color: #94a3b8;
 }
 
 main {
