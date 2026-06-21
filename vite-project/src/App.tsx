@@ -213,7 +213,11 @@ export default function App() {
           <div>
             <h3>Active Signal</h3>
 
-            <p>{engine.activeGreenLane}</p>
+            <div className="signal-status">
+              <span className="signal-dot"></span>
+
+              <p>{engine.activeGreenLane}</p>
+            </div>
           </div>
 
 	  <div>
