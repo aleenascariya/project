@@ -4,6 +4,7 @@ import { useTrafficEngine } from "./hooks/useTrafficEngine";
 import Card from "./components/ui/Card";
 import StatCard from "./components/ui/StatCard";
 import { Car, TrafficCone, Circle } from "lucide-react";
+import StatusBadge from "./components/ui/StatusBadge";
 
 export default function App() {
   const engine = useTrafficEngine();
@@ -268,14 +269,67 @@ export default function App() {
           />
 
           <Card title="Live Density">
-            <h3>Live Density</h3>
 
-            <ul>
-              <li>North: {laneCounts.North}</li>
-              <li>East: {laneCounts.East}</li>
-              <li>South: {laneCounts.South}</li>
-              <li>West: {laneCounts.West}</li>
-            </ul>
+	    <div className="flex items-center justify-between">
+
+    <h3 className="text-lg font-bold">
+        Live Density
+    </h3>
+
+    <StatusBadge status="live" />
+
+</div>
+            <div className="space-y-5">
+
+  {[
+    { lane: "North", value: laneCounts.North },
+    { lane: "East", value: laneCounts.East },
+    { lane: "South", value: laneCounts.South },
+    { lane: "West", value: laneCounts.West },
+  ].map(({ lane, value }) => {
+
+    const percent = Math.min((value / 10) * 100, 100);
+
+    return (
+
+      <div key={lane}>
+
+        <div className="flex justify-between mb-1">
+
+          <span className="font-semibold">
+            {lane}
+          </span>
+
+          <span className="text-cyan-400">
+            {value} Vehicles
+          </span>
+
+        </div>
+
+        <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
+
+          <div
+            className={`h-full transition-all duration-700 ${
+              percent > 70
+                ? "bg-red-500"
+                : percent > 40
+                ? "bg-yellow-400"
+                : "bg-emerald-500"
+            }`}
+            style={{
+              width: `${percent}%`,
+            }}
+          />
+
+        </div>
+
+      </div>
+
+    );
+
+  })}
+
+</div>
           </Card>
 
           <Card title="Activity Stream">
