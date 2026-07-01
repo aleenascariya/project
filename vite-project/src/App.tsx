@@ -15,7 +15,7 @@ export default function App() {
   const laneCounts = engine.getLaneCounts();
 
   return (
-    <div className="min-h-screen bg-[#0F1115] text-white">
+    <div className="space-y-3 border-t border-white/10 pt-5 mt-5">
       <Header
         latency="14 ms"
         version="v1.0"
@@ -23,22 +23,38 @@ export default function App() {
       />
 
       <main className="grid grid-cols-[320px_1fr] gap-6 p-6">
-        <aside className="bg-[#14171D] border border-white/10 rounded-2xl p-6 shadow-lg">
-          <h3>Control Paradigm</h3>
+        <aside className="sticky top-6 h-[calc(100vh-7rem)] overflow-y-auto bg-[#14171D] border border-white/10 rounded-2xl p-6 shadow-lg">
+          <h3 className="text-xs uppercase tracking-[0.25em] text-cyan-400 font-bold mb-4">
+    AI CONTROL
+</h3>
 
-          <p>Current Mode: {engine.controlMode}</p>
+          <div className="mb-4 rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-3">
 
-          <button
-            onClick={() => engine.setControlMode("adaptive")}
-          >
-            Adaptive AI
-          </button>
+    <p className="text-xs text-slate-400 uppercase">
+        Current Mode
+    </p>
 
-          <button
-            onClick={() => engine.setControlMode("fixed")}
-          >
-            Fixed Clock
-          </button>
+    <h2 className="text-lg font-bold text-white mt-1">
+        {engine.controlMode === "adaptive"
+            ? "Adaptive AI"
+            : "Fixed Clock"}
+    </h2>
+
+</div>
+
+          <PrimaryButton
+    className="w-full mb-3"
+    onClick={() => engine.setControlMode("adaptive")}
+>
+    Adaptive AI
+</PrimaryButton>
+
+          <PrimaryButton
+    className="w-full"
+    onClick={() => engine.setControlMode("fixed")}
+>
+    Fixed Clock
+</PrimaryButton>
 
           <div>
             <p>
@@ -56,8 +72,10 @@ export default function App() {
             </button>
           </div>
 
-          <div>
-            <h3>Vehicle Injection</h3>
+          <div className="border-t border-white/10 pt-6 mt-6">
+	  <h3 className="text-xs uppercase tracking-[0.25em] text-cyan-400 font-bold mb-4">
+    VEHICLE INJECTION
+</h3>
 
             <button
               onClick={() =>
@@ -92,8 +110,10 @@ export default function App() {
             </button>
           </div>
 
-          <div>
-            <h3>Phase Overrides</h3>
+          <div className="border-t border-white/10 pt-6 mt-6">
+    <h3 className="text-xs uppercase tracking-[0.25em] text-cyan-400 font-bold mb-4">
+        PHASE OVERRIDES
+    </h3>
 
             <button
               onClick={() =>
@@ -128,47 +148,57 @@ export default function App() {
             </button>
           </div>
 
-	  <div>
-            <h3>Simulation Controls</h3>
+	  <div className="border-t border-white/10 pt-6 mt-6">
+    <h3 className="text-xs uppercase tracking-[0.25em] text-cyan-400 font-bold mb-4">
+        SIMULATION CONTROLS
+    </h3>
 
-            <button
+            <PrimaryButton
               onClick={engine.generateDemoTraffic}
             >
               Generate Demo Traffic
-            </button>
+            </PrimaryButton>
 
-            <button
+            <PrimaryButton
               onClick={engine.clearVehicles}
             >
               Clear Vehicles
-            </button>
+            </PrimaryButton>
 
-            <button
+            <PrimaryButton
               onClick={engine.resetDashboard}
             >
               Reset Dashboard
-            </button>
+            </PrimaryButton>
           </div>
 	  
         </aside>
 
-        <section className="grid gap-6">
-          <AIStatusPanel
+        <section className="grid grid-cols-12 gap-6 auto-rows-min">
+          <div className="col-span-6">
+	  <AIStatusPanel
     controlMode={engine.controlMode}
 />
+           </div>
 
+	   <div className="col-span-6">
           <AIRecommendationPanel
     recommendations={engine.recommendations}
 />
 
-          <AIInsightPanel
+          </div>
+
+	  <div className="col-span-8">
+	  <AIInsightPanel
   currentPrompt={engine.currentPrompt}
   setCurrentPrompt={engine.setCurrentPrompt}
   generateInsight={engine.generateInsight}
   insights={engine.insights}
 />
 
-          <Card title="Active Signal">
+	  </div>
+
+	  <Card title="Active Signal">
 
             <div className="signal-status">
               <span className="signal-dot"></span>
@@ -177,6 +207,7 @@ export default function App() {
             </div>
           </Card>
 
+	  <div className="col-span-12">
 	  <Card title="Traffic Statistics">
 	    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
@@ -200,6 +231,7 @@ export default function App() {
 
              </div>
 	   </Card>
+	   </div>
 
           <Card title="System Health">
 
@@ -218,10 +250,12 @@ export default function App() {
 
           <Card title="Intersection Simulator">
 
+    <div className="col-span-12">
     <JunctionSimulator
         vehicles={engine.allVehicles}
         activeLane={engine.activeGreenLane}
     />
+    </div>
 
 </Card>
 
@@ -291,9 +325,9 @@ export default function App() {
 
           <Card title="Activity Stream">
 
-	    <button onClick={engine.clearLogs}>
+	    <PrimaryButton onClick={engine.clearLogs}>
               Clear Logs
-            </button>
+            </PrimaryButton>
 
             {engine.logs.length === 0 ? (
               <p>No activity available</p>
@@ -310,11 +344,11 @@ export default function App() {
 
           <Card title="Data Registry">
 
-            <button
+            <PrimaryButton
               onClick={engine.saveTrafficMetrics}
             >
               Save
-            </button>
+            </PrimaryButton>
 
 	    <p>
               Save metrics after adding vehicles.
