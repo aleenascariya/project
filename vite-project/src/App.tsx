@@ -7,6 +7,7 @@ import { Car, TrafficCone, Circle } from "lucide-react";
 import StatusBadge from "./components/ui/StatusBadge";
 import AIStatusPanel from "./components/dashboard/AIStatusPanel";
 import PrimaryButton from "./components/ui/PrimaryButton";
+import AIRecommendationPanel from "./components/dashboard/AIRecommendationPanel";
 
 export default function App() {
   const engine = useTrafficEngine();
@@ -155,22 +156,9 @@ export default function App() {
     controlMode={engine.controlMode}
 />
 
-          <Card title="AI Recommendations">
-
-            {engine.recommendations.length === 0 ? (
-              <p>Add vehicles to recieve AI recommendations</p>
-            ) : (
-              <ul>
-                {engine.recommendations.map(
-                  (recommendation) => (
-                    <li key={recommendation.id}>
-                      {recommendation.message}
-                    </li>
-                  )
-                )}
-              </ul>
-            )}
-          </Card>
+          <AIRecommendationPanel
+    recommendations={engine.recommendations}
+/>
 
           <Card title="AI Insights">
 
