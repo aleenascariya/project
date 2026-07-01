@@ -2,6 +2,8 @@ import Header from "./components/layout/Header";
 import { JunctionSimulator } from "./components/JunctionSimulator";
 import { useTrafficEngine } from "./hooks/useTrafficEngine";
 import Card from "./components/ui/Card";
+import StatCard from "./components/ui/StatCard";
+import { Car, TrafficCone, Circle } from "lucide-react";
 
 export default function App() {
   const engine = useTrafficEngine();
@@ -221,26 +223,27 @@ export default function App() {
           </Card>
 
 	  <Card title="Traffic Statistics">
-	    <h3>Traffic Statistics</h3>
-	    
-	    <ul>
+	    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-	        <li>
+               <StatCard
+                    title="Vehicles"
+                    value={engine.getTotalVehicles()}
+                    icon={<Car size={24} />}
+               />
 
-		Total Vehicles: {engine.getTotalVehicles()}
+               <StatCard
+                    title="Busiest Lane"
+                    value={engine.getHighestDensityLane()}
+                    icon={<TrafficCone size={24} />}
+               />
 
-		</li>
+               <StatCard
+                    title="Green Signal"
+                    value={engine.activeGreenLane}
+                    icon={<Circle size={24} className="fill-green-500 text-green-500" />}
+               />
 
-
-		<li>
-	          Busiest Lane: {engine.getHighestDensityLane()}
-
-		</li>
-
-		<li>
-		 Current Signal: {engine.activeGreenLane}
-		</li>
-	    </ul>
+             </div>
 	   </Card>
 
           <Card title="System Health">
