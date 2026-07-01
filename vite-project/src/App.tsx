@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { JunctionSimulator } from "./components/JunctionSimulator";
 import { useTrafficEngine } from "./hooks/useTrafficEngine";
 
